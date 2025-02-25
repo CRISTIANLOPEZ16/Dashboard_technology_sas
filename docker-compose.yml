@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: php_app
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    environment:
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+      DB_HOST: db
+    networks:
+      - app_network
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app_network
+
+networks:
+  app_network:
+
+volumes:
+  mysql_data:
