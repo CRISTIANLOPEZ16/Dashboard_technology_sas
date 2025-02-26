@@ -17,3 +17,5 @@ WORKDIR /var/www/html
 # Instalar PHPUnit y Doctrine
 COPY composer.json /var/www/html/
 RUN composer install
+EXPOSE 8000
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "."]

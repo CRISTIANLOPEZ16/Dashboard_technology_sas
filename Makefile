@@ -3,14 +3,8 @@
 build:
 	docker-compose up --build -d
 
-up:
-	docker-compose up -d
-
 down:
 	docker-compose down
-
-composer-install:
-	docker-compose exec app composer install
 
 test:
 	docker-compose exec app vendor/bin/phpunit

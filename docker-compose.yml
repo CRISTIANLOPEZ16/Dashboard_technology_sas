@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: php_app
+    ports:
+      - "8080:8000"
     working_dir: /var/www
     volumes:
       - .:/var/www

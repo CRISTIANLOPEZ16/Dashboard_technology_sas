@@ -3,7 +3,7 @@
 namespace App\Application\UseCase;
 
 use App\Application\DTO\RegisterUserRequest;
-use App\Application\DTO\UserResponseDTO;
+use App\Application\DTO\RegisterUserResponse;
 use App\Domain\Entity\User;
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Domain\ValueObject\UserId;
@@ -25,7 +25,7 @@ class RegisterUserUseCase
         $this->eventDispatcher = $eventDispatcher;
     }
     
-    public function execute(RegisterUserRequest $request): UserResponseDTO
+    public function execute(RegisterUserRequest $request): RegisterUserResponse
     {
         // Verificar si el usuario ya existe antes de crearlo
         if ($this->userRepository->findByEmail(new Email($request->email))) {
@@ -48,7 +48,7 @@ class RegisterUserUseCase
         $this->eventDispatcher->dispatch($event);
         
         // Retornar DTO de respuesta
-        return new UserResponseDTO(
+        return new RegisterUserResponse(
             $user->getId()->getValue(),
             $user->getName()->getValue(),
             $user->getEmail()->getValue(),

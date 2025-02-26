@@ -1,6 +1,6 @@
 <?php
 namespace App\Application\DTO;
-class UserResponseDTO
+class RegisterUserResponse
 {
     public string $id;
     public string $name;

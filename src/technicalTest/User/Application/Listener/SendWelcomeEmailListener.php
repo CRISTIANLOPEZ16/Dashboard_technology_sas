@@ -15,6 +15,6 @@ class SendWelcomeEmailListener implements EventListenerInterface
         }
 
         $user = $event->getUser();
-        echo "📧 Enviando email de bienvenida a: " . $user->getEmail()->getValue() . "\n";
+        error_log("📧 Enviando email de bienvenida a: " . $user->getEmail()->getValue() . "\n");
     }
 }
